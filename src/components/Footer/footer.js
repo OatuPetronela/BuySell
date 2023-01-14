@@ -1,21 +1,22 @@
 const navigation = {
-  solutions: [
+  col1: [
     { name: 'Ajutor si contact', href: '0' },
     { name: 'Cautari frecvente', href: '0' },
     { name: 'Conditii de utilizare', href: '0' },
-    { name: 'Publicitate pe BuySell', href: '0' },
   ],
-  support: [
+  col2: [
     { name: 'Setari Cookies', href: '0' },
     { name: 'Harta site', href: '0' },
-    { name: 'Harta judetelor', href: '0' },
     { name: 'Cariere in BuySell', href: '0' },
   ],
-  company: [
+  col3: [
     { name: 'Cum functioneaza', href: '0' },
-    { name: 'BuySell pentru afacerea ta', href: '0' },
     { name: 'Livrare prin BuySell', href: '0' },
     { name: 'Promovarea anunturilor', href: '0' },
+  ],
+  col4: [
+    { name: 'BuySell pentru afacerea ta', href: '0' },
+    { name: 'Publicitate pe BuySell', href: '0' },
     { name: 'Politica de confidentialitate', href: '0' },
   ],
   social: [
@@ -59,72 +60,82 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className=" bg-green-100 " aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="mx-auto ml-32 max-w-8xl py-12 px-6 lg:py-10 lg:px-4">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8 xl:col-span-1">
-            <p className="text-xl text-gray-500">
-              Urmareste-ne pe
-            </p>
-            <div className="flex space-x-6">
-              {navigation.social.map((item) => (
-                <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-8 w-8" aria-hidden="true" />
-                </a>
-              ))}
+     <footer className="bg-gray-50" aria-labelledby="footer-heading">
+          <h2 id="footer-heading" className="sr-only">
+            Footer
+          </h2>
+          <div className="mx-auto max-w-md px-6 pt-12 sm:max-w-7xl lg:px-8 lg:pt-16">
+            <div className="xl:grid xl:grid-cols-3 xl:gap-4">
+              <div className="space-y-5 xl:col-span-1 mt-4">
+                <p className="text-gray-500 text-2xl">
+                  Urmareste-ne pe
+                </p>
+                <div className="flex space-x-6">
+                  {navigation.social.map((item) => (
+                    <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
+                      <span className="sr-only">{item.name}</span>
+                      <item.icon className="h-6 w-6 mr-6" aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-12 grid grid-cols-2 gap-4 xl:col-span-2 xl:mt-0">
+                <div className="md:grid md:grid-cols-2 md:gap-2">
+                  <div>
+                    <ul className="mt-4 space-y-4">
+                      {navigation.col1.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-12 md:mt-0">
+                    <ul  className="mt-4 space-y-4">
+                      {navigation.col2.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="md:grid md:grid-cols-2 md:gap-2">
+                  <div>
+                    <ul className="mt-4 space-y-4">
+                      {navigation.col3.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-12 md:mt-0">
+                    <ul  className="mt-4 space-y-4">
+                      {navigation.col4.map((item) => (
+                        <li key={item.name}>
+                          <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="text-xl text-gray-500">
-              Descarca aplicatia pentru telefon din
-            </p>
+            <div className="mt-12 border-t border-gray-200 py-8">
+              <p className="text-base text-gray-400  sm:text-center">
+                &copy; 2023
+              </p>
+            </div>
           </div>
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <ul className="mt-4 space-y-4">
-                  {navigation.solutions.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base font-medium text-gray-900 hover:text-gray-900">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-12 md:mt-0">
-                <ul  className="mt-4 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base font-medium text-gray-900 hover:text-gray-900">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <ul  className="mt-4 space-y-4">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base font-medium text-gray-900 hover:text-gray-900">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <p className="text-base text-gray-400 xl:text-center">&copy; 2023 BuySell</p>
-        </div>
-      </div>
-    </footer>
+        </footer>
   )
 }

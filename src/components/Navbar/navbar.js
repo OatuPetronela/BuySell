@@ -19,33 +19,32 @@ export default function Navbar() {
                 <div class="logo">
                   <a href="0">
                     <h3>
-                      Buy<span>Sell</span>
+                      Buy<span className="bg-gradient-to-r from-teal-500 to-cyan-600 p-3 shadow-lg">Sell</span>
                     </h3>
                   </a>
                 </div>
               </div>
-              <div className="flex flex-2 justify-center px-2 xs:ml-6 xs:justify-end ml-20">
-                <div className="w-full max-w-lg lg:max-w-2xl">
-                  <label htmlFor="search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MagnifyingGlassIcon
-                        className="h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
+                <div className="min-w-0 flex-1 md:px-8 lg:px-20 xl:col-span-6">
+                  <div className="flex items-center px-6 py-9 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
+                    <div className="w-5/6">
+                      <label htmlFor="search" className="sr-only">
+                        Search
+                      </label>
+                      <div className="relative">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                        </div>
+                        <input
+                          id="search"
+                          name="search"
+                          className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Search"
+                          type="search"
+                        />
+                      </div>
                     </div>
-                    <input
-                      id="search"
-                      name="search"
-                      className="block w-full rounded-md border border-transparent bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
-                      placeholder="Cauta produsul dorit..."
-                      type="search"
-                    />
                   </div>
                 </div>
-              </div>
 
               <div className="flex lg:hidden">
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
