@@ -1,11 +1,6 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import {Bars3Icon, XMarkIcon, ChatBubbleLeftIcon, HeartIcon, PlusIcon,} from "@heroicons/react/24/outline";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { Disclosure } from "@headlessui/react";
+import {MagnifyingGlassIcon,Bars3Icon, XMarkIcon, ChatBubbleLeftIcon, HeartIcon, PlusIcon, UserIcon} from "@heroicons/react/24/outline";
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   return (
@@ -45,7 +40,6 @@ export default function Navbar() {
                     </div>
                   </div>
                 </div>
-
               <div className="flex lg:hidden">
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -56,94 +50,41 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="hidden lg:ml-4 lg:block">
+              <div className="hidden lg:ml-0 lg:block">
                 <div className="flex items-center">
+                  <Link to="/mesaje">
                   <button
-                    type="button"
-                    className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
+                    className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Mesaje
                     <ChatBubbleLeftIcon
-                      className="ml-2 mr-2 h-6 w-6"
-                      aria-hidden="true"
-                    />
+                      className="ml-2 mr-2 h-5 w-5"
+                      aria-hidden="true"/>
                   </button>
-                  <button type="button" className="ml-1 mr-4">
+                  </Link>
+                  <Link to="/favorite">
+                  <button className="ml-1 mr-4">
                     <HeartIcon className=" block w-10 h-10 rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"></HeartIcon>
                   </button>
+                  </Link>
+                   <Link to="/new-item">
                   <button
                     type="button"
-                    className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4  py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    Adauga anut nou
+                    className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4  py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Adauga anunt nou
                     <PlusIcon
                       className="ml-2 -mr-1 h-5 w-5"
-                      aria-hidden="true"
-                    />
+                      aria-hidden="true"/>
                   </button>
-                  <Menu as="div" className="relative ml-4 flex-shrink-0">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="0"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Profilul tau
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="0"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Setari
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="0"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Deconectare
-                            </a>
-                          )}
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                  </Link>
+                  <Link to="/register">
+                 <button
+                    className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <UserIcon
+                      className="ml-2 mr-2 h-6 w-6"
+                      aria-hidden="true"/>
+                    Contul tau
+                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -154,76 +95,27 @@ export default function Navbar() {
               <Disclosure.Button
                 as="a"
                 href="0"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-              >
+                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">
                 Mesaje
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
                 href="0"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                 Favorite
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
                 href="0"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
                 Adauga anunt nou
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
                 href="0"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Sing out
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                Contul tau
               </Disclosure.Button>
-            </div>
-            <div className="border-t border-gray-700 pt-4 pb-3">
-              {" "}
-              <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-white">
-                    Tom Cook
-                  </div>
-                  <div className="text-sm font-medium text-gray-400">
-                    tom@example.com
-                  </div>
-                </div>
-              </div>{" "}
-              <div className="mt-3 space-y-1 px-2">
-                {" "}
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                >
-                  Profilul tau
-                </Disclosure.Button>{" "}
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                >
-                  {" "}
-                  Setari{" "}
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                >
-                  Deconectare
-                </Disclosure.Button>{" "}
-              </div>
             </div>
           </Disclosure.Panel>{" "}
         </>
