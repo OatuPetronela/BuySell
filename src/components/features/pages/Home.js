@@ -1,15 +1,15 @@
 import Footer from "../../footer/Footer"
-import Content from "../../content/Content"
-import Navbar from "../../navbar/Navbar"
+import ContentMainPage from "../../content/ContentMainPage";
+import Navbar from "../../navbar/Navbar";
 
 const Home = () => {
-    return(
-        <>
-        <Navbar/>
-        <Content/>
-        <Footer/>
-        </>
-    )
-}
+  return (
+    <>
+      <Navbar />
+      <ContentMainPage />
+      <Footer />
+    </>
+  );
+};
 
  export default Home; 
