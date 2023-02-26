@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
+
 const categories = [
   {
     name: "Auto, moto si ambarcațiuni",
@@ -42,7 +43,36 @@ const categories = [
     name: "Piese auto",
     hyperlink: "/Piese-auto",
     imageUrl: "https://cdn-icons-png.flaticon.com/512/3895/3895728.png",
-    content: "...",
+    links: [
+      {
+        name: "Roti - Jante- Anvelope",
+        url: "/Piese-auto/Roti-Jante-Anvelope",
+      },
+      {
+        name: "Alte piese",
+        url: "/Piese-auto/Alte-piese",
+      },
+      {
+        name: "Piese utilaje agricole",
+        url: "/Piese-auto/Piese-utilaje-agricole",
+      },
+      {
+        name: "Consumabile - accesorii",
+        url: "/Piese-auto/Consumabile-accesorii",
+      },
+      {
+        name: "Piese utilaje industriale",
+        url: "/Piese-auto/Piese-utilaje-industriale",
+      },
+      {
+        name: "Caroserie-Interior",
+        url: "/Piese-auto",
+      },
+      {
+        name: "Mecanica -electrica",
+        url: "/Piese-auto/Mecanica-electrica",
+      },
+    ],
   },
   {
     name: "Imobiliare",
@@ -116,15 +146,11 @@ const categories = [
   },
 ];
 
-export default function ContentMainPage() {
+const ContentMainPage = () => {
   const [openCategory, setOpenCategory] = useState(null);
 
   const handleCategoryClick = (index) => {
-    if (index === openCategory) {
-      setOpenCategory(null);
-    } else {
-      setOpenCategory(index);
-    }
+    setOpenCategory((prevIndex) => (prevIndex === index ? null : index));
   };
 
   return (
@@ -154,13 +180,12 @@ export default function ContentMainPage() {
                     </h3>
                   </button>
                   {openCategory === index && (
-                    <div className="bg-gray-200 p-2" style={{ width: "100vw" }}>
-                      <div className="flex items-center mb-3">
-                        <ChevronRightIcon
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                        <Link to={category.hyperlink} className="mr-3">
+                    <div className="bg-gray-700 p-2" style={{ width: "30vw" }}>
+                      <div className="flex items-center mb-2">
+                        <Link
+                          to={category.hyperlink}
+                          className="hover:text-green-500"
+                        >
                           <b>
                             Vezi toate anunturile din
                             {" " + category.name.toLowerCase()}
@@ -168,14 +193,19 @@ export default function ContentMainPage() {
                         </Link>
                       </div>
                       <hr />
-                      <div className="grid sm:grid-cols-2 md:sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                        {category.links.map((link, subIndex) => (
-                          <div key={subIndex} className="flex items-center">
+                      <div className="grid sm:grid-cols-1 md:sm:grid-cols-1 lg:grid-cols-1 gap-3">
+                        {category.links.map((link) => (
+                          <div key={link.name} className="flex items-center">
                             <ChevronRightIcon
                               className="m-3 h-5 w-5"
                               aria-hidden="true"
                             />
-                            <a href={link.url}>{link.name}</a>
+                            <Link
+                              to={link.url}
+                              className="text-base text-white hover:text-green-500"
+                            >
+                              {link.name}
+                            </Link>
                           </div>
                         ))}
                       </div>
@@ -204,4 +234,6 @@ export default function ContentMainPage() {
       </div>
     </div>
   );
-}
+};
+
+export default ContentMainPage;

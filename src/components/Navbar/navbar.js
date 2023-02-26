@@ -92,7 +92,7 @@ export default function Navbar() {
                       />
                     </button>
                   </Link>
-                  <Link to="/register">
+                  <Link to="/auth/register">
                     <button className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       <UserIcon
                         className="ml-2 mr-2 h-6 w-6"
@@ -131,7 +131,7 @@ export default function Navbar() {
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="0"
+                href="/auth/register"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >
                 Contul tau

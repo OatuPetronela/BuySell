@@ -9,6 +9,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "heroicons-react": "^1.4.1",
+    "json-server": "^0.17.2",
+    "json-server-auth": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
@@ -17,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "json-server-auth -p 3000 --watch db.json -r routes.json",
+    "start:server": "json-server-auth -p 3500 --watch db.json -r routes.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "json-loader": "^0.5.7",
     "tailwindcss": "^3.2.4"
   }
 }
