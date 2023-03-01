@@ -1,10 +1,31 @@
 {
-    "users":[],
-    "items":[
-        {
-          "id": 1,
-          "title": "milk",
-          "userid": 1
-        }
-    ]
+  "users": [
+    {
+      "email": "test@test.com",
+      "password": "$2a$10$tEreXCPJ7B1c7Q6b2/DMWO71B7u1YfBCslePwsYFzBZ.otHnVV4sC",
+      "password_check": "test123",
+      "fName": "Larisa",
+      "lName": "Barloiu",
+      "id": 1
+    },
+    {
+      "email": "birloiularisa@yahoo.com",
+      "password": "$2a$10$1qQE62Zg4Ax4l49ulVNWcuZOlP81zef5.2LKnH28mn2Sb0Pu4hVdq",
+      "fName": "Dana",
+      "lName": "Lst",
+      "id": 2
+    },
+    {
+      "email": "test@test1.com",
+      "password": "$2a$10$.A2FvTqvkEFwumJ4TOOiVeTcFiGRZRAGdSVMTIKLjfXwqyvzBTnIa",
+      "id": 3
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "title": "milk",
+      "userid": 1
+    }
+  ]
 }
