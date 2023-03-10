@@ -19,10 +19,17 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "json-server-auth -p 3500 --watch db.json -r routes.json",
+    "start:server": "json-server-auth -p 3500 --routes routes.json --watch db.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint": "eslint --fix --ext .ts,.tsx ./src"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "npm run lint"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +51,7 @@
   },
   "devDependencies": {
     "json-loader": "^0.5.7",
+    "lint-staged": "^13.1.2",
     "tailwindcss": "^3.2.4"
   }
 }

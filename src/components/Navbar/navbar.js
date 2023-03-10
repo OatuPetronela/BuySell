@@ -9,8 +9,10 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "components/features/auth/Auth.context";
 
 export default function Navbar() {
+  const { logout, user } = useAuthContext();
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -20,14 +22,14 @@ export default function Navbar() {
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex items-center px-2 lg:px-0">
                 <div class="logo">
-                  <a href="0">
+                  <Link to="/">
                     <h3>
                       Buy
                       <span className="bg-gradient-to-r from-teal-500 to-cyan-600 p-3 shadow-lg">
                         Sell
                       </span>
                     </h3>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="min-w-0 flex-1 md:px-8 lg:px-20 xl:col-span-6">
@@ -92,15 +94,34 @@ export default function Navbar() {
                       />
                     </button>
                   </Link>
-                  <Link to="/auth/register">
-                    <button className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                      <UserIcon
-                        className="ml-2 mr-2 h-6 w-6"
-                        aria-hidden="true"
-                      />
-                      Contul tau
-                    </button>
-                  </Link>
+                  {user !== null && (
+                    <>
+                      Welcome test
+                      <Link to="/login">
+                        <button
+                          onClick={logout}
+                          className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        >
+                          <UserIcon
+                            className="ml-2 mr-2 h-6 w-6"
+                            aria-hidden="true"
+                          />
+                          Deconecteaza-te
+                        </button>
+                      </Link>
+                    </>
+                  )}
+                  {user === null && (
+                    <Link to="/login">
+                      <button className="inline-flex items-center rounded-md border border-transparent  text-gray-400 hover:bg-gray-700 hover:text-white px-3 py-2 text-md font-medium leading-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <UserIcon
+                          className="ml-2 mr-2 h-6 w-6"
+                          aria-hidden="true"
+                        />
+                        Conecteaza-te
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -129,12 +150,13 @@ export default function Navbar() {
               >
                 Adauga anunt nou
               </Disclosure.Button>
+
               <Disclosure.Button
                 as="a"
-                href="/auth/register"
+                href="/login"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >
-                Contul tau
+                Conecteaza-te
               </Disclosure.Button>
             </div>
           </Disclosure.Panel>{" "}
