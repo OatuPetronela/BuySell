@@ -150,14 +150,25 @@ export default function Navbar() {
               >
                 Adauga anunt nou
               </Disclosure.Button>
-
-              <Disclosure.Button
-                as="a"
-                href="/login"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Conecteaza-te
-              </Disclosure.Button>
+              {user !== null && (
+                <Disclosure.Button
+                  as="a"
+                  href="/login"
+                  onClick={logout}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                >
+                  Deconecteaza-te
+                </Disclosure.Button>
+              )}
+              {user === null && (
+                <Disclosure.Button
+                  as="a"
+                  href="/login"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                >
+                  Conecteaza-te
+                </Disclosure.Button>
+              )}
             </div>
           </Disclosure.Panel>{" "}
         </>
