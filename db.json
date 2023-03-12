@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "email": "test@test.com",
-      "password": "$2a$10$KUfM4Xr5RWnUtHIXB.5jiu8RBcY.DcxrIu91P7ZwZ/24pOfWH1sCS",
-      "fName": "Test",
-      "lName": "Test",
-      "id": 1
+      "email": "p@p",
+      "password": "$2a$10$5uurPaeIi0a2am8iGtGueOxd9lK7ZEAU/LFIEZ.KyVhtaQzCb7Z.y",
+      "fName": "Test2",
+      "lName": "Test2",
+      "id": 2
     }
   ]
 }

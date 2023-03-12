@@ -1,38 +1,22 @@
-import { createContext, useContext, useState } from "react";
+import useLocalStorageState from "../../../hooks/useLocalStorageState";
+import { createContext, useContext } from "react";
 
 const tokenStorageKey = "token";
 const userStorgeKey = "user";
 
-const getItemFromStorage = (key) => {
-  const val = localStorage.getItem("key");
-  if (val !== null) {
-    try {
-      return JSON.parse(val);
-    } catch (error) {
-      console.error(`Error parsing JSON for key "${key}"`, error);
-      return null;
-    }
-  }
-  return null;
-};
-
 export const AuthContext = createContext(null);
 
 export const AuthContextProvider = ({ children }) => {
-  const [token, setToken] = useState(() => getItemFromStorage(tokenStorageKey));
-  const [user, setUser] = useState(() => getItemFromStorage(userStorgeKey));
+  const [token, setToken, removeToken] = useLocalStorageState(tokenStorageKey);
+  const [user, setUser, removeUser] = useLocalStorageState(userStorgeKey);
 
   const login = (data) => {
-    localStorage.setItem(tokenStorageKey, data.accessToken);
-    localStorage.setItem(userStorgeKey, JSON.stringify(data.user));
     setToken(data.accessToken);
     setUser(data.user);
   };
   const logout = () => {
-    localStorage.removeItem(tokenStorageKey);
-    localStorage.removeItem(userStorgeKey);
-    setToken(null);
-    setUser(null);
+    removeToken();
+    removeUser();
   };
   return (
     <AuthContext.Provider value={{ token, user, login, logout }}>
