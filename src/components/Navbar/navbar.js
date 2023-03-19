@@ -96,7 +96,9 @@ export default function Navbar() {
                   </Link>
                   {user !== null && (
                     <>
-                      Welcome test
+                      <span className="text-white ml-4">
+                        Welcome {user.fName}
+                      </span>
                       <Link to="/login">
                         <button
                           onClick={logout}

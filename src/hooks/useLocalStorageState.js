@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const updateStorage = (key, value) => {
   if (window?.localStorage) {
@@ -54,19 +54,24 @@ const useLocalStorageState = (key, initialState) => {
     };
   }, [key]);
 
-  const handeleStateUpdate = (newState) => {
-    let future = newState;
-    if (typeof newState === "function") {
-      future = newState(state);
-    }
-    updateStorage(key, future);
-    setState(future);
-  };
+  const handeleStateUpdate = useCallback(
+    (newState) => {
+      setState((oldState) => {
+        let future = newState;
+        if (typeof newState === "function") {
+          future = newState(oldState);
+        }
+        updateStorage(key, future);
+        return future;
+      });
+    },
+    [key]
+  );
 
-  const removeState = () => {
+  const removeState = useCallback(() => {
     window.localStorage.removeItem(key);
     setState(null);
-  };
+  }, [key]);
 
   return [state, handeleStateUpdate, removeState];
 };

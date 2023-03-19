@@ -1,5 +1,5 @@
 import useLocalStorageState from "../../../hooks/useLocalStorageState";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 
 const tokenStorageKey = "token";
 const userStorgeKey = "user";
@@ -9,6 +9,10 @@ export const AuthContext = createContext(null);
 export const AuthContextProvider = ({ children }) => {
   const [token, setToken, removeToken] = useLocalStorageState(tokenStorageKey);
   const [user, setUser, removeUser] = useLocalStorageState(userStorgeKey);
+
+  useEffect(() => {
+    setToken("test");
+  }, [setToken]);
 
   const login = (data) => {
     setToken(data.accessToken);

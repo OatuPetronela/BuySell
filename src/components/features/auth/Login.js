@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "./Auth.context";
 import Navbar from "components/navbar/Navbar";
 
@@ -9,9 +9,11 @@ const Login = () => {
     password: "",
   });
 
-  const { login } = useAuthContext();
+  const { login, user } = useAuthContext();
 
-  const navigate = useNavigate();
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   const handleInputChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -26,7 +28,6 @@ const Login = () => {
       body: JSON.stringify(values),
     }).then((res) => res.json());
     login(data);
-    navigate("/");
   };
 
   return (
