@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuthContext } from "./Auth.context";
 import Navbar from "components/navbar/Navbar";
+import ErrorMessage from "components/errors/ErrorMessage";
 
 const Login = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const [serverError, setServerError] = useState("");
 
   const { login, user } = useAuthContext();
 
@@ -27,6 +29,10 @@ const Login = () => {
       },
       body: JSON.stringify(values),
     }).then((res) => res.json());
+    if (typeof data !== "object") {
+      setServerError(data);
+      return;
+    }
     login(data);
   };
 
@@ -36,6 +42,7 @@ const Login = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {serverError && <ErrorMessage>{serverError}</ErrorMessage>}
             <div>
               <label
                 htmlFor="email"
