@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MERN buysell app",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+  "express": "^4.18.2"
+}
+}
