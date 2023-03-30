@@ -1,5 +1,5 @@
 import Footer from "../../footer/Footer"
-import ContentMainPage from "../../content/ContentMainPage";
+import ContentMainPage from "../../screens/ContentMainPage";
 import Navbar from "../../navbar/Navbar";
 
 const Home = () => {

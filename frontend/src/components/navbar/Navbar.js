@@ -97,7 +97,7 @@ export default function Navbar() {
                   {user !== null && (
                     <>
                       <span className="text-white ml-4">
-                        Welcome {user.fName}
+                        Bine ai venit {user.fName}
                       </span>
                       <Link to="/login">
                         <button
