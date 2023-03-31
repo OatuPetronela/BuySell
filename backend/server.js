@@ -1,5 +1,8 @@
-const express = require('express');
-const categories =require('./data/categories')
+import express from 'express'
+import categories from './data/categories.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express();
 
@@ -7,5 +10,5 @@ app.get('/categories', (req, res)=>{
     res.json(categories)
 })
 
-
-app.listen(5000, console.log('Server started on port 5000'))
+const PORT = process.env.PORT
+app.listen(PORT, console.log(`Server started on port ${PORT}`)) 
