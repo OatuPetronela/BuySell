@@ -82,7 +82,7 @@ export default function Navbar() {
                       <HeartIcon className=" block w-10 h-10 rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"></HeartIcon>
                     </button>
                   </Link>
-                  <Link to="/new-item">
+                  <Link to="/new-product">
                     <button
                       type="button"
                       className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4  py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -147,7 +147,7 @@ export default function Navbar() {
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="/new-item"
+                href="/new-product"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >
                 Adauga anunt nou
