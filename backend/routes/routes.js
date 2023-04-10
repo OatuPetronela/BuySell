@@ -1,15 +1,16 @@
 import express from "express";
-const router = express.Router();
 import asyncHandler from "express-async-handler";
-import categories from "../data/categories.js";
+import Category from "../models/publishCategoryModel.js";
+
+const router = express.Router();
 
 //@desc Fetch all categories
 //@route GET/categories
 //@access Public
 router.get(
   "/",
-  asyncHandler(async (req, res) => {
-    const allCategories = await categories;
+  asyncHandler(async (req, res, next) => {
+    const allCategories = await Category.find({});
     res.json(allCategories);
   })
 );
@@ -20,11 +21,12 @@ router.get(
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const category = await categories.findById(req.params.id);
+    const category = await Category.findById(req.params.id);
     if (category) {
       res.json(category);
     } else {
-      res.status(404).json({ message: "Category not found" });
+      res.status(404);
+      throw new Error("Category not found");
     }
   })
 );

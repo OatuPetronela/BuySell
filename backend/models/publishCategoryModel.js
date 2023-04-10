@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const productSchema = mongoose.Schema(
+const categorySchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -37,6 +37,6 @@ const productSchema = mongoose.Schema(
   }
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Category = mongoose.model("Category", categorySchema);
 
-export default Product;
+export default Category;
