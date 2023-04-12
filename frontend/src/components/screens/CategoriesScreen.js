@@ -1,36 +1,36 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { listCategories } from "actions/categoryAction";
 
 const CategoriesScreen = () => {
-    
-    const [openCategory, setOpenCategory] = useState(null);
-    const [categories, setCategories]= useState([])
+  const [openCategory, setOpenCategory] = useState(null);
 
-    const handleCategoryClick = (index) => {
-      setOpenCategory((prevIndex) => (prevIndex === index ? null : index));
-    };
-  
-    useEffect(() => {
-        const fetchCategories = async () => {
-          try {
-            const { data } = await axios.get("/categories");
-            setCategories(data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        fetchCategories();
-      }, []);
+  const handleCategoryClick = (index) => {
+    setOpenCategory((prevIndex) => (prevIndex === index ? null : index));
+  };
+  const dispatch = useDispatch();
 
-    return (
-        <div className="bg-gray-900 pt-10 sm:pt-10 sm:pb-10 lg:overflow-hidden lg:pt-8 lg:pb-14">
-        <div className="mx-auto max-w-7xl lg:px-8">
-          <h1 className="text-white text-4xl mb-8 font-light tracking-normal text-center">
-            Categorii principale
-          </h1>
-        </div>
+  const categoryList = useSelector((state) => state.categoryList);
+  const { loading, categories, error } = categoryList;
+
+  useEffect(() => {
+    dispatch(listCategories());
+  }, [dispatch]);
+
+  return (
+    <div className="bg-gray-900 pt-10 sm:pt-10 sm:pb-10 lg:overflow-hidden lg:pt-8 lg:pb-14">
+      <div className="mx-auto max-w-7xl lg:px-8">
+        <h1 className="text-white text-4xl mb-8 font-light tracking-normal text-center">
+          Categorii principale
+        </h1>
+      </div>
+      {loading ? (
+        <h1 className="text-white">Loading...</h1>
+      ) : error ? (
+        <h1>{error}</h1>
+      ) : (
         <div className="grid grid-cols-2 mr-8 ml-0 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8">
           {categories.map((category, index) => (
             <div key={category.id} className="text-center">
@@ -82,8 +82,9 @@ const CategoriesScreen = () => {
             </div>
           ))}
         </div>
-      </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default CategoriesScreen
+export default CategoriesScreen;
