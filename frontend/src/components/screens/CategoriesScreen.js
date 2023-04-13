@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { listCategories } from "actions/categoryAction";
+import Message from "components/messages/Message";
+import Loader from "components/messages/Loader";
 
 const CategoriesScreen = () => {
   const [openCategory, setOpenCategory] = useState(null);
@@ -26,10 +28,11 @@ const CategoriesScreen = () => {
           Categorii principale
         </h1>
       </div>
+
       {loading ? (
-        <h1 className="text-white">Loading...</h1>
+        <Loader />
       ) : error ? (
-        <h1>{error}</h1>
+        <Message errorMessage={error} />
       ) : (
         <div className="grid grid-cols-2 mr-8 ml-0 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8">
           {categories.map((category, index) => (
