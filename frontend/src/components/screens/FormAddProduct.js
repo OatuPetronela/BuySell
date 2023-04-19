@@ -16,7 +16,7 @@ const DropDownButton = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get("/categories");
+        const { data } = await axios.get("/products");
         setCategories(data);
       } catch (error) {
         console.log(error);
@@ -70,6 +70,22 @@ const DropDownButton = () => {
 };
 
 const FormAddProduct = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.post("/products", {
+        title,
+        description,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -78,7 +94,7 @@ const FormAddProduct = () => {
       </h1>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-6xl">
         <div className=" bg-gray-100 py-8 px-4 shadow sm:rounded-lg sm:px-12">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="space-y-14">
               <div className="border-b border-gray-900/10 pb-12">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -94,8 +110,8 @@ const FormAddProduct = () => {
                         <input
                           type="text"
                           name="title"
-                          id="title"
-                          autoComplete="title"
+                          value={title}
+                          onChange={(event) => setTitle(event.target.value)}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="ex.: iPhone 14, încă în garanție"
                           required
@@ -103,9 +119,7 @@ const FormAddProduct = () => {
                       </div>
                     </div>
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                      <div>
-                        <DropDownButton />
-                      </div>
+                      {/* dropdown */}
                     </div>
                   </div>
 
@@ -118,9 +132,10 @@ const FormAddProduct = () => {
                     </label>
                     <div className="mt-2">
                       <textarea
-                        id="description"
                         name="description"
                         rows={4}
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
                         className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:p-1 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                         defaultValue={""}
                         placeholder="Încearcă să scrii ce ai vrea tu să afli dacă te-ai uita la acest anunț"
@@ -178,6 +193,7 @@ const FormAddProduct = () => {
               </button>
               <button
                 type="submit"
+                value="Submit"
                 className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Publica anuntul
