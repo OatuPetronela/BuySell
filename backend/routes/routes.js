@@ -31,4 +31,8 @@ router.get(
   })
 );
 
+//@desc Create a new category
+//@route POST/categories
+//@access Public
+
 export default router;

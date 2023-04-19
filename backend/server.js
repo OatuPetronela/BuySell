@@ -3,6 +3,7 @@ import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import colors from "colors";
 import router from "./routes/routes.js";
+import Product from "./models/publishProductModel.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -10,6 +11,8 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Api is running...");
