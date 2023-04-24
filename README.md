@@ -18,3 +18,29 @@ To handle errors on the frontend, I used Redux to create actions that dispatch s
 On the backend, I created endpoints to retrieve the categories and allow users to post new product listings. To ensure that the application performs efficiently and securely, I implemented best practices such as input validation, password hashing, and error handling.
 
 Overall, BuySell is a continuously evolving project that I am committed to improving and developing further.
+
+### How To Use
+
+# Clone this repository
+$ git clone https://github.com/OatuPetronela/BuySell.git
+
+# Install dependencies for Frontend
+$ npm install json-loader
+$ npm install lint-staged
+$ npm install tailwindcss
+
+# Install dependencies for Backend
+$ npm install mongodb
+$ npm install mongoose
+$ npm install dotenv
+$ npm install express
+$ npm install express-async-handler
+
+# Run Frontend 
+ $cd frontend
+ $npm start
+# Run Backend
+ $cd backend
+ $npm start
+# Run both Frontend+Backend
+ $ npm run dev
