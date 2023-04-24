@@ -40,10 +40,12 @@ $ npm install express-async-handler
 # Run Frontend 
  $cd frontend
  $npm start
+ 
 # Run Backend
  $cd backend
  $npm start
-# Run both Frontend+Backend
+ 
+# Run both Frontend + Backend
  $ npm run dev
 
 ```
