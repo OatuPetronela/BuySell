@@ -21,6 +21,7 @@ Overall, BuySell is a continuously evolving project that I am committed to impro
 
 ### How To Use
 
+```bash
 # Clone this repository
 $ git clone https://github.com/OatuPetronela/BuySell.git
 
@@ -44,3 +45,5 @@ $ npm install express-async-handler
  $npm start
 # Run both Frontend+Backend
  $ npm run dev
+
+```
