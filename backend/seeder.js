@@ -39,7 +39,7 @@ const importData = async () => {
     await Product.insertMany(sampleProducts);
 
     console.log("data imported!".green.inverse);
-    process.exit;
+    process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
     process.exit(1);
@@ -53,14 +53,14 @@ const destroyData = async () => {
     await Product.deleteMany();
 
     console.log("data distroyed!".red.inverse);
-    process.exit;
+    process.exit();
   } catch (error) {
     console.error(`${error}`.red.inverse);
     process.exit(1);
   }
 };
 
-if (process.argv[2] == "-d") {
+if (process.argv[2] === "-d") {
   destroyData();
 } else {
   importData();
