@@ -2,8 +2,11 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import Category from "../models/publishCategoryModel.js";
 import Product from "../models/publishProductModel.js";
+import multer from "multer";
+import fs from "fs";
 
 const router = express.Router();
+const upload = multer({ dest: 'uploads/' });
 
 //@desc Fetch all categories
 //@route GET/categories
@@ -35,21 +38,23 @@ router.get(
 //@desc Create a new product
 //@route POST/products
 //@access Public
-router.post("/products", asyncHandler(async (req, res) => {
+router.post("/products", upload.single('imageUrl'), (req, res) => {
+  const imageBuffer = fs.readFileSync(req.file.path);
   try {
     const product = new Product({
       title: req.body.title,
       description: req.body.description,
+      imageUrl: imageBuffer,
     });
 
-    const createdProduct = await product.save();
+    const createdProduct = product.save();
 
     res.status(201).json(createdProduct);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
-    }
-  })
-);
+    };
+  });
+
 
 export default router;

@@ -72,18 +72,23 @@ const DropDownButton = () => {
 const FormAddProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
+
+   const handleFileChange = (event) => {
+    setImageUrl(event.target.files[0]);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      await axios.post("/products", {
-        title,
-        description,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('imageUrl', imageUrl);
+
+  axios.post('/products', formData)
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
   };
 
   return (
@@ -167,11 +172,15 @@ const FormAddProduct = () => {
                             <span>Adauga imagini</span>
                             <input
                               id="file-upload"
-                              name="file-upload"
                               type="file"
+                              onChange={handleFileChange}
                               className="sr-only"
                             />
-                          </label>
+                             <img
+              src={URL.createObjectURL(imageUrl)}
+              alt="Thumb"
+            />
+            </label>
                           <p className="pl-1">or drag and drop</p>
                         </div>
                         <p className="text-xs leading-5 text-gray-600">
