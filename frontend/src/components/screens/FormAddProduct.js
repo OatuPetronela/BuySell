@@ -10,26 +10,20 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const DropDownButton = () => {
-  const [categories, setCategories] = useState([]);
+const DropDownButton = ({ categories, setSelectedCategory }) => {
+  const [selectedCategory, setSelected] = useState(null);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get("/products");
-        setCategories(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCategories();
-  }, []);
+  const handleSelectCategory = (category) => {
+    setSelected(category);
+    setSelectedCategory(category);
+  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
+        <br />
         <Menu.Button className="inline-flex w-full justify-center gap-x-28 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          Categories*
+          {selectedCategory ? selectedCategory.name : "Categories*"}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -54,8 +48,9 @@ const DropDownButton = () => {
                   <li
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-2 text-sm cursor-pointer"
                     )}
+                    onClick={() => handleSelectCategory(category)}
                   >
                     {category.name}
                   </li>
@@ -72,9 +67,23 @@ const DropDownButton = () => {
 const FormAddProduct = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-   const handleFileChange = (event) => {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const handleFileChange = (event) => {
     setImageUrl(event.target.files[0]);
   };
 
@@ -82,13 +91,22 @@ const FormAddProduct = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('imageUrl', imageUrl);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("imageUrl", imageUrl);
+    if (selectedCategory !== null) {
+      formData.append("category", selectedCategory.name);
+    }
 
-  axios.post('/products', formData)
-      .then(response => console.log(response))
-      .catch(error => console.error(error));
+    axios
+      .post("/products", formData)
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
+
+    setTitle("");
+    setDescription("");
+    setImageUrl("");
+    setSelectedCategory({ name: "Categories*" });
   };
 
   return (
@@ -123,11 +141,14 @@ const FormAddProduct = () => {
                         />
                       </div>
                     </div>
-                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                      {/* dropdown */}
-                    </div>
                   </div>
-
+                  <div className="sm:col-span-6">
+                    <DropDownButton
+                      categories={categories}
+                      selectedCategory={selectedCategory}
+                      setSelectedCategory={setSelectedCategory}
+                    />
+                  </div>
                   <div className="col-span-full">
                     <label
                       htmlFor="description"
@@ -146,9 +167,6 @@ const FormAddProduct = () => {
                         placeholder="Încearcă să scrii ce ai vrea tu să afli dacă te-ai uita la acest anunț"
                       />
                     </div>
-                    <p className="mt-3 text-sm leading-6 text-gray-600">
-                      Scrie cel puțin încă 100 caractere
-                    </p>
                   </div>
 
                   <div className="col-span-full">
@@ -176,11 +194,13 @@ const FormAddProduct = () => {
                               onChange={handleFileChange}
                               className="sr-only"
                             />
-                             <img
-              src={URL.createObjectURL(imageUrl)}
-              alt="Thumb"
-            />
-            </label>
+                            {imageUrl && (
+                              <img
+                                src={URL.createObjectURL(imageUrl)}
+                                alt="Thumb"
+                              />
+                            )}
+                          </label>
                           <p className="pl-1">or drag and drop</p>
                         </div>
                         <p className="text-xs leading-5 text-gray-600">
