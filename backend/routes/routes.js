@@ -38,13 +38,14 @@ router.get(
 //@desc Create a new product
 //@route POST/products
 //@access Public
-router.post("/products", upload.single('imageUrl'), (req, res) => {
-  const imageBuffer = fs.readFileSync(req.file.path);
+router.post("/products", upload.array('imageUrl', 10), (req, res) => {
+  const imageBuffer = fs.readFileSync(req.files[0].path);
   try {
     const product = new Product({
       title: req.body.title,
       description: req.body.description,
       imageUrl: imageBuffer,
+      category: req.body.category,
     });
 
     const createdProduct = product.save();
