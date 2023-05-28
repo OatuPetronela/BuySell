@@ -1,6 +1,9 @@
 import Product from "../models/publishProductModel.js";
 import fs from "fs";
 
+//@desc Create a new product
+//@route POST/products
+//@access Public
 const postProducts = (req, res) => {
   const imageBuffer = fs.readFileSync(req.files[0].path);
   try {

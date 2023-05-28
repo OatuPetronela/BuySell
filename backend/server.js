@@ -1,7 +1,9 @@
 import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
-import router from "./routes/routes.js";
+import productRoutes from "./routes/productRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -15,8 +17,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Api is running...");
 });
-
-app.use("/", router);
+app.use("/users", userRoutes);
+app.use("/", productRoutes);
+app.use("/", categoryRoutes);
 
 app.use(notFound);
 
