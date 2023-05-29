@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import colors from "colors";
 import users from "./data/users.js";
 import categories from "./data/categories.js";
-import Users from "./models/users.js";
+import User from "./models/user.js";
 import Product from "./models/publishProductModel.js";
 import products from "./data/products.js";
 import connectDB from "./config/db.js";
@@ -16,10 +16,10 @@ await connectDB();
 const importData = async () => {
   try {
     await Category.deleteMany();
-    await Users.deleteMany();
+    await User.deleteMany();
     await Product.deleteMany();
 
-    const createdUsers = await Users.insertMany(users);
+    const createdUsers = await User.insertMany(users);
 
     const adminUser = createdUsers[0].id;
     const sampleCategories = categories.map((category) => {
@@ -49,7 +49,7 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     await Category.deleteMany();
-    await Users.deleteMany();
+    await User.deleteMany();
     await Product.deleteMany();
 
     console.log("data distroyed!".red.inverse);
