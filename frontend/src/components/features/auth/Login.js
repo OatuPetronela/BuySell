@@ -1,39 +1,29 @@
-import { useState} from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useAuthContext } from "./Auth.context";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "components/navbar/Navbar";
-import ErrorMessage from "components/errors/ErrorMessage";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "components/messages/Message";
+import { login } from "actions/userAction";
+import Loader from "components/messages/Loader";
 
 const Login = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const [serverError, setServerError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  const { login, user } = useAuthContext();
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
   const handleInputChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = await fetch("http://localhost:3500/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    }).then((res) => res.json());
-    if (typeof data !== "object") {
-      setServerError(data);
-      return;
+    if (e.target.name === "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name === "password") {
+      setPassword(e.target.value);
     }
-    login(data);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(email, password));
   };
 
   return (
@@ -42,7 +32,8 @@ const Login = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {serverError && <ErrorMessage>{serverError}</ErrorMessage>}
+            {error && <Message>{error}</Message>}
+            {loading && <Loader />}
             <div>
               <label
                 htmlFor="email"
@@ -58,7 +49,7 @@ const Login = () => {
                   required
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={handleInputChange}
-                  value={values.email}
+                  value={email}
                 />
               </div>
             </div>
@@ -78,7 +69,7 @@ const Login = () => {
                   required
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={handleInputChange}
-                  value={values.password}
+                  value={password}
                 />
               </div>
             </div>

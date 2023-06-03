@@ -16,7 +16,7 @@ const config = {
         'Content-Type': 'application/json',
     }
 }
-const {data} = await axios.post('/users/login', {email, password}, config )
+const { data } = await axios.post("/users/login", { email, password }, config);
 dispatch({
   type: USER_LOGIN_SUCCESS,
   payload:data
