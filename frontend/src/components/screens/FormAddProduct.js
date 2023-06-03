@@ -100,7 +100,7 @@ const FormAddProduct = () => {
 
     axios
       .post("/products", formData)
-      .then((response) => console.log(response))
+      .then((response) => response)
       .catch((error) => console.error(error));
 
     setTitle("");
