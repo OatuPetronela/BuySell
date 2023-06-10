@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate} from "react-router-dom";
 import Navbar from "components/navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "components/messages/Message";
@@ -10,9 +10,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+   const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error} = userLogin;
   const handleInputChange = (e) => {
     if (e.target.name === "email") {
       setEmail(e.target.value);
@@ -24,8 +25,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    navigate('/')
   };
-
   return (
     <>
       <Navbar />
