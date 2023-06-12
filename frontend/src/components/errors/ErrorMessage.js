@@ -1,6 +1,6 @@
 const ErrorMessage = ({ children }) => {
   return (
-    <section className=" border-red-700 text-red-900 p-2">
+    <section className=" border-red-700 text-black p-2">
       <header className="border-2 border-red-600 p-2 text-center bg-red-300 rounded-sm">
         ⚠ Oops! An error occurred.{" "}
       </header>
