@@ -112,7 +112,7 @@ export default function Navbar() {
                   {userInfo ? (
                     <>
                       <span className="text-white ml-4 mr-6">
-                        Bine ai venit <b>{userInfo.name}</b>
+                        Bine ai venit <b>{userInfo.fname}</b>
                       </span>
                       <Menu
                         as="div"
@@ -232,7 +232,7 @@ export default function Navbar() {
               {userInfo ? (
                 <>
                   <span className="text-white ml-4 mr-6">
-                    Bine ai venit <b>{userInfo.name}</b>
+                    Bine ai venit <b>{userInfo.fname}</b>
                   </span>
                   <Menu as="div" className="relative inline-block text-left">
                     <div>

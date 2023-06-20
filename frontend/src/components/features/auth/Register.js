@@ -1,40 +1,31 @@
 import { useState } from "react";
 import Navbar from "components/navbar/Navbar";
-import { useAuthContext } from "./Auth.context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "components/messages/Message";
+import { register } from "actions/userAction";
+import Loader from "components/messages/Loader";
 
 const Register = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    password_check: "",
-    fName: "",
-    lName: "",
-  });
-  const { login } = useAuthContext();
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setValues({
-      ...values,
-      [e.target.name]: value,
-    });
-  };
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error } = userRegister;
 
-  const handleSubmit = async (e) => {
-    const { password_check, ...payload } = values;
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    const data = await fetch("http://localhost:3500/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }).then((res) => res.json());
-    login(data);
-    navigate("/");
+    if (password !== passwordCheck) {
+      return <Message>Password do not match</Message>;
+    } else {
+      dispatch(register(fname, lname, email, password, passwordCheck));
+    }
   };
   return (
     <>
@@ -48,7 +39,9 @@ const Register = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={submitHandler}>
+              {error && <Message>{error}</Message>}
+              {loading && <Loader />}
               <div>
                 <label
                   htmlFor="email"
@@ -63,8 +56,8 @@ const Register = () => {
                     type="email"
                     required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={handleInputChange}
-                    value={values.email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                 </div>
               </div>
@@ -83,8 +76,8 @@ const Register = () => {
                     type="password"
                     required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={handleInputChange}
-                    value={values.password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                   />
                 </div>
               </div>
@@ -102,8 +95,8 @@ const Register = () => {
                     type="password"
                     required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={handleInputChange}
-                    value={values.password_check}
+                    onChange={(e) => setPasswordCheck(e.target.value)}
+                    value={passwordCheck}
                   />
                 </div>
               </div>
@@ -121,8 +114,8 @@ const Register = () => {
                     type="text"
                     required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={handleInputChange}
-                    value={values.fName}
+                    onChange={(e) => setFname(e.target.value)}
+                    value={fname}
                   />
                 </div>
               </div>
@@ -140,8 +133,8 @@ const Register = () => {
                     type="text"
                     required
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={handleInputChange}
-                    value={values.lName}
+                    onChange={(e) => setLname(e.target.value)}
+                    value={lname}
                   />
                 </div>
               </div>
